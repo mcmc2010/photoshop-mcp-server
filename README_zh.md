@@ -57,6 +57,61 @@ pip install photoshop-mcp-server
 uv install photoshop-mcp-server
 ```
 
+## 本地开发运行
+
+如果您想在本地开发环境或虚拟环境 (venv) 中运行此项目：
+
+### 使用 venv 虚拟环境
+
+```powershell
+# 1. 进入项目目录
+cd photoshop-mcp-server
+
+# 2. 创建虚拟环境
+python -m venv venv
+
+# 3. 激活虚拟环境
+.\venv\Scripts\Activate.ps1
+
+# 4. 安装依赖（开发模式）
+pip install -e .
+
+# 5. 运行服务器
+photoshop-mcp-server
+
+# 或通过模块运行
+python -m photoshop_mcp_server.server
+
+# 调试模式
+photoshop-mcp-server --debug
+```
+
+### 指定 Photoshop 版本
+
+```powershell
+# 设置环境变量指定 Photoshop 版本
+$env:PS_VERSION="2024"
+photoshop-mcp-server
+```
+
+### 在 MCP 客户端中使用本地 venv
+
+将以下配置添加到 MCP 客户端（如 Claude Desktop）：
+
+```json
+{
+  "mcpServers": {
+    "photoshop": {
+      "command": "d:/demo/photoshop-mcp-server/venv/Scripts/python",
+      "args": ["-m", "photoshop_mcp_server.server"],
+      "env": {
+        "PS_VERSION": "2024"
+      }
+    }
+  }
+}
+```
+
 ## MCP 主机配置
 
 此服务器设计为与各种 MCP 主机一起工作。`PS_VERSION` 环境变量用于指定要连接的 Photoshop 版本（例如，"2024"、"2023"、"2022" 等）。

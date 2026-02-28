@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "photoshop": {
+      "command": "${workspaceFolder}/venv/Scripts/python",
+      "args": ["-m", "photoshop_mcp_server.server"],
+      "env": {
+        "PS_VERSION": "2019"
+      }
+    }
+  }
+}

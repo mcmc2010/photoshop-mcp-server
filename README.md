@@ -57,6 +57,61 @@ pip install photoshop-mcp-server
 uv install photoshop-mcp-server
 ```
 
+## Local Development
+
+If you want to run this project in a local development environment or virtual environment (venv):
+
+### Using venv Virtual Environment
+
+```powershell
+# 1. Navigate to project directory
+cd photoshop-mcp-server
+
+# 2. Create virtual environment
+python -m venv venv
+
+# 3. Activate virtual environment
+.\venv\Scripts\Activate.ps1
+
+# 4. Install dependencies (editable mode)
+pip install -e .
+
+# 5. Run the server
+photoshop-mcp-server
+
+# Or run via module
+python -m photoshop_mcp_server.server
+
+# Debug mode
+photoshop-mcp-server --debug
+```
+
+### Specifying Photoshop Version
+
+```powershell
+# Set environment variable to specify Photoshop version
+$env:PS_VERSION="2024"
+photoshop-mcp-server
+```
+
+### Using Local venv in MCP Client
+
+Add the following configuration to your MCP client (e.g., Claude Desktop):
+
+```json
+{
+  "mcpServers": {
+    "photoshop": {
+      "command": "d:/demo/photoshop-mcp-server/venv/Scripts/python",
+      "args": ["-m", "photoshop_mcp_server.server"],
+      "env": {
+        "PS_VERSION": "2024"
+      }
+    }
+  }
+}
+```
+
 ## MCP Host Configuration
 
 This server is designed to work with various MCP hosts. The `PS_VERSION` environment variable is used to specify which Photoshop version to connect to (e.g., "2024", "2023", "2022", etc.).
